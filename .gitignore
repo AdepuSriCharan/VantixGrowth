@@ -1,0 +1,20 @@
+# Local editor and environment files
+.claude/
+.thumbnail
+.DS_Store
+
+# Root-level generated/exported artifacts
+VantixGrowth-*.dc.html
+support.js
+screenshots/
+uploads/
+
+# Vite app outputs and dependencies
+vantixgrowth/node_modules/
+vantixgrowth/dist/
+vantixgrowth/.env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
