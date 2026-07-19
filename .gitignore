@@ -4,10 +4,7 @@
 .DS_Store
 
 # Root-level generated/exported artifacts
-VantixGrowth-*.dc.html
-support.js
-screenshots/
-uploads/
+
 
 # Vite app outputs and dependencies
 vantixgrowth/node_modules/

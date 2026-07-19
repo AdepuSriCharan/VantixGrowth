@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--indigo:#17140D;--indigo-deep:#0E0B06;--brick:#F4BE1B;--cream:#F7F0DD;--cream-dim:#EDE4CC;--ink:#17140D;--accent:#F4BE1B;--grot:'Geist','Hanken Grotesk','Helvetica Neue',system-ui,sans-serif;--mono:'Geist Mono','JetBrains Mono',ui-monospace,monospace;}
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--cream);color:var(--indigo);font-family:var(--grot);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  a{color:var(--indigo);text-decoration:none;}
+  ::selection{background:var(--brick);color:var(--indigo);}
+  @media (pointer:fine){*{cursor:none;}}
+  @keyframes vgm-drift1{0%{transform:translate(-8%,-6%) scale(1)}50%{transform:translate(10%,8%) scale(1.15)}100%{transform:translate(-8%,-6%) scale(1)}}
+  @media (prefers-reduced-motion:reduce){*{animation:none !important;}}
+
+  @media (max-width:820px){
+    [style*="grid-template-columns:minmax"],
+    [style*="grid-template-columns:repeat(3"],
+    [style*="grid-template-columns:repeat(2"]{grid-template-columns:1fr !important;}
+  }
+  @media (max-width:560px){
+    [data-nav]{flex-wrap:wrap !important;row-gap:10px !important;}
+  }
+</style>
+</helmet>
+
+<div data-root ref="{{ rootRef }}" style="position:relative;width:100%;">
+  <div data-grain style="position:fixed;inset:0;z-index:60;pointer-events:none;opacity:0.05;mix-blend-mode:overlay;background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%224%22/></filter><rect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/></svg>');"></div>
+  <div data-cursor-dot style="position:fixed;top:0;left:0;z-index:90;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--brick);pointer-events:none;will-change:transform;"></div>
+  <div data-cursor-ring style="position:fixed;top:0;left:0;z-index:90;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--brick);border-radius:50%;pointer-events:none;will-change:transform;font-family:var(--mono);font-size:9px;letter-spacing:0.15em;color:var(--brick);text-transform:uppercase;transition:background .25s,color .25s;"></div>
+
+  <nav data-nav style="position:fixed;top:0;left:0;right:0;z-index:70;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(20px,4vw,56px);transition:padding .4s cubic-bezier(0.16,1,0.3,1),background .4s;">
+    <a href="VantixGrowth-Home.dc.html" data-magnetic data-cursor="" style="display:flex;align-items:center;gap:12px;">
+      <span data-nav-mark style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:7px;background:var(--brick);color:var(--indigo);font-family:var(--mono);font-weight:500;font-size:16px;">V</span>
+      <span data-nav-word style="font-weight:600;font-size:16px;letter-spacing:-0.01em;color:var(--indigo);">VantixGrowth <span style="opacity:.55;font-weight:500;">Media</span></span>
+    </a>
+    <div style="display:flex;align-items:center;gap:clamp(14px,2.4vw,34px);">
+      <a href="VantixGrowth-Work.dc.html" data-navlink data-cursor="" style="font-family:var(--mono);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--indigo);">Work</a>
+      <a href="VantixGrowth-Services.dc.html" data-navlink data-cursor="" style="font-family:var(--mono);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--brick);">Services</a>
+      <a href="VantixGrowth-About.dc.html" data-navlink data-cursor="" style="font-family:var(--mono);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--indigo);">About</a>
+      <a href="VantixGrowth-Contact.dc.html" data-magnetic data-cursor="" data-btn style="display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:100px;background:var(--brick);color:var(--indigo);font-weight:600;font-size:13px;"><span>Book a call</span></a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section data-theme="indigo" data-screen-label="Services Hero" style="position:relative;background:var(--indigo);color:var(--cream);padding:clamp(140px,20vh,220px) clamp(20px,4vw,56px) clamp(70px,10vh,120px);overflow:hidden;">
+    <div style="position:absolute;top:-10%;right:-6%;width:46vw;height:46vw;border-radius:50%;background:radial-gradient(circle,rgba(244,190,27,0.4),transparent 62%);filter:blur(40px);animation:vgm-drift1 24s ease-in-out infinite;z-index:0;"></div>
+    <div style="position:relative;z-index:2;max-width:1400px;margin:0 auto;">
+      <div data-reveal style="font-family:var(--mono);font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(247,240,221,0.65);margin-bottom:clamp(24px,4vh,40px);">[ Services — the content growth engine ]</div>
+      <h1 style="margin:0;max-width:16ch;font-weight:600;font-size:clamp(2.6rem,7vw,6.4rem);line-height:0.96;letter-spacing:-0.03em;text-wrap:balance;">
+        <span data-reveal-line style="display:block;">One engine.</span>
+        <span data-reveal-line style="display:block;">Three depths of <span style="color:var(--brick);">partnership</span>.</span>
+      </h1>
+      <p data-reveal style="margin:clamp(28px,4vh,44px) 0 0;max-width:56ch;font-size:clamp(1.05rem,1.5vw,1.35rem);line-height:1.6;color:rgba(247,240,221,0.82);">Every partner runs the same machine — content that turns technical depth into audience and pipeline. What changes across tiers is scope, seniority, and how deep we go. No public pricing. We scope each partnership to fit.</p>
+    </div>
+  </section>
+
+  <!-- TIERS DETAIL -->
+  <section data-theme="cream" style="background:var(--cream);color:var(--indigo);padding:clamp(80px,13vh,150px) clamp(20px,4vw,56px);">
+    <div style="max-width:1400px;margin:0 auto;">
+      <div data-reveal style="font-family:var(--mono);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--indigo);margin-bottom:clamp(32px,5vh,56px);">[ 01 — The three tiers ]</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,28px);align-items:stretch;">
+        <!-- Basic -->
+        <div data-reveal style="display:flex;flex-direction:column;padding:clamp(24px,2.4vw,38px);border-radius:16px;background:var(--indigo);color:var(--cream);">
+          <div style="font-family:var(--mono);font-size:12px;letter-spacing:0.1em;color:var(--brick);margin-bottom:12px;">01</div>
+          <div style="font-weight:600;font-size:clamp(1.5rem,2.4vw,2.1rem);letter-spacing:-0.015em;">Basic</div>
+          <div style="font-size:0.95rem;color:rgba(247,240,221,0.72);margin:6px 0 22px;">The content engine starter — for teams getting a serious rhythm going.</div>
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(247,240,221,0.5);margin-bottom:14px;">Who it's for</div>
+          <p style="margin:0 0 22px;font-size:0.95rem;line-height:1.5;color:rgba(247,240,221,0.82);">Early-stage tech teams with expertise to share and no consistent content output yet.</p>
+          <div style="display:flex;flex-direction:column;gap:10px;flex:1;">
+            <div style="display:flex;gap:10px;font-size:0.95rem;line-height:1.4;"><span style="color:var(--brick);font-family:var(--mono);">✓</span><span>Short-form content (Reels / Shorts / TikTok)</span></div>
+            <div style="display:flex;gap:10px;font-size:0.95rem;line-height:1.4;"><span style="color:var(--brick);font-family:var(--mono);">✓</span><span>Scripting</span></div>
+            <div style="display:flex;gap:10px;font-size:0.95rem;line-height:1.4;"><span style="color:var(--brick);font-family:var(--mono);">✓</span><span>Clipping</span></div>
+            <div style="display:flex;gap:10px;font-size:0.95rem;line-height:1.4;"><span style="color:var(--brick);font-family:var(--mono);">✓</span><span>Single-platform management</span></div>
+            <div style="display:flex;gap:10px;font-size:0.95rem;line-height:1.4;"><span style="color:var(--brick);font-family:var(--mono);">✓</span><span>Monthly performance report</span></div>
+          </div>
+          <a href="VantixGrowth-Contact.dc.html" data-magnetic data-cursor="" data-btn="var(--brick)" data-btn-text="var(--indigo)" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:28px;padding:14px 20px;border-radius:100px;background:var(--indigo);color:var(--cream);font-weight:600;font-size:14px;"><span>Enquire</span> <span data-arrow style="font-family:var(--mono);display:inline-block;transition:transform .4s cubic-bezier(0.16,1,0.3,1);">→</span></a>
+        </div>
+        <!-- Premium -->
+        <div data-reveal style="display:flex;flex-direction:column;padding:clamp(24px,2.4vw,38px);border-radius:16px;background:var(--indigo);color:var(--cream);">
+          <div style="font-family:var(--mono);font-size:12px;letter-spacing:0.1em;color:var(--brick);margin-bottom:12px;">02</div>
+          <div style="font-weight:600;font-size:clamp(1.5rem,2.4vw,2.1rem);letter-spacing:-0.015em;">Premium</div>
+          <div style="font-size:0.95rem;color:rgba(247,240,221,0.72);margin:6px 0 22px;">The growth partner — a full multi-platform engine with senior craft.</div>
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(247,240,221,0.5);margin-bottom:14px;">Who it's for</div>
+          <p style="margin:0 0 22px;font-size:0.95rem;line-height:1.5;color:rgba(247,240,221,0.82);">Funded tech companies ready to compound audience across every channel that matters.</p>
+          <div style="display:flex;flex-direction:column;gap:10px;flex:1;">
+            <div style="display:flex;gap:10px;font-size:0.95rem;line-height:1.4;"><span style="color:var(--brick);font-family:var(--mono);">✓</span><span style="opacity:0.9;"><strong style="color:var(--cream);">Everything in Basic</strong></span></div>
+            <div style="display:flex;gap:10px;font-size:0.95rem;line-height:1.4;"><span style="color:var(--brick);font-family:var(--mono);">✓</span><span style="opacity:0.9;">Long-form content (YouTube)</span></div>
+            <div style="display:flex;gap:10px;font-size:0.95rem;line-height:1.4;"><span style="color:var(--brick);font-family:var(--mono);">✓</span><span style="opacity:0.9;">Carousels (X / Instagram / LinkedIn)</span></div>
+            <div style="display:flex;gap:10px;font-size:0.95rem;line-height:1.4;"><span style="color:var(--brick);font-family:var(--mono);">✓</span><span style="opacity:0.9;">Multi-platform management</span></div>
+            <div style="display:flex;gap:10px;font-size:0.95rem;line-height:1.4;"><span style="color:var(--brick);font-family:var(--mono);">✓</span><span style="opacity:0.9;">Dedicated project manager</span></div>
+            <div style="display:flex;gap:10px;font-size:0.95rem;line-height:1.4;"><span style="color:var(--brick);font-family:var(--mono);">✓</span><span style="opacity:0.9;">Senior storytelling editors</span></div>
+          </div>
+          <a href="VantixGrowth-Contact.dc.html" data-magnetic data-cursor="" data-btn style="display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:28px;padding:14px 20px;border-radius:100px;background:var(--brick);color:var(--indigo);font-weight:600;font-size:14px;"><span>Enquire</span> <span data-arrow style="font-family:var(--mono);display:inline-block;transition:transform .4s cubic-bezier(0.16,1,0.3,1);">→</span></a>
+        </div>
+        <!-- VGM Studio -->
+        <div data-reveal style="position:relative;display:flex;flex-direction:column;padding:clamp(24px,2.4vw,38px);border-radius:16px;background:var(--brick);color:var(--indigo);box-shadow:0 34px 70px -24px rgba(244,190,27,0.5);">
+          <span style="position:absolute;top:18px;right:18px;font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:5px 10px;border:1px solid rgba(23,20,13,0.4);border-radius:100px;">Flagship</span>
+          <div style="font-family:var(--mono);font-size:12px;letter-spacing:0.1em;color:rgba(23,20,13,0.7);margin-bottom:12px;">03</div>
+          <div style="font-weight:600;font-size:clamp(1.5rem,2.4vw,2.1rem);letter-spacing:-0.015em;">VGM Studio</div>
+          <div style="font-size:0.95rem;color:rgba(23,20,13,0.72);margin:6px 0 22px;">Full-service flagship — our highest-craft, deepest partnership.</div>
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(23,20,13,0.6);margin-bottom:14px;">Who it's for</div>
+          <p style="margin:0 0 22px;font-size:0.95rem;line-height:1.5;color:rgba(23,20,13,0.78);">Category leaders who want a studio, not a vendor — full production, direction, and priority.</p>
+          <div style="display:flex;flex-direction:column;gap:10px;flex:1;">
+            <div style="display:flex;gap:10px;font-size:0.95rem;line-height:1.4;"><span style="font-family:var(--mono);">✓</span><span><strong>Everything in Premium</strong></span></div>
+            <div style="display:flex;gap:10px;font-size:0.95rem;line-height:1.4;"><span style="font-family:var(--mono);">✓</span><span>Full shooting — we fly to you</span></div>
+            <div style="display:flex;gap:10px;font-size:0.95rem;line-height:1.4;"><span style="font-family:var(--mono);">✓</span><span>Creative &amp; shoot direction</span></div>
+            <div style="display:flex;gap:10px;font-size:0.95rem;line-height:1.4;"><span style="font-family:var(--mono);">✓</span><span>All-platform management</span></div>
+            <div style="display:flex;gap:10px;font-size:0.95rem;line-height:1.4;"><span style="font-family:var(--mono);">✓</span><span>Top-priority senior team</span></div>
+          </div>
+          <a href="VantixGrowth-Contact.dc.html" data-magnetic data-cursor="" data-btn="var(--brick)" data-btn-text="var(--indigo)" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:28px;padding:14px 20px;border-radius:100px;background:var(--indigo);color:var(--brick);font-weight:600;font-size:14px;"><span>Enquire</span> <span data-arrow style="font-family:var(--mono);display:inline-block;transition:transform .4s cubic-bezier(0.16,1,0.3,1);">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFFERENTIATORS -->
+  <section data-theme="indigo" style="background:var(--indigo-deep);color:var(--cream);padding:clamp(80px,13vh,150px) clamp(20px,4vw,56px);">
+    <div style="max-width:1400px;margin:0 auto;">
+      <div data-reveal style="font-family:var(--mono);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--brick);margin-bottom:clamp(32px,5vh,56px);">[ 02 — Why partners stay ]</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,3vw,56px);">
+        <div data-reveal>
+          <div style="font-family:var(--mono);font-size:13px;color:var(--brick);margin-bottom:16px;">01</div>
+          <h3 style="margin:0 0 14px;font-weight:600;font-size:clamp(1.5rem,2.6vw,2.3rem);letter-spacing:-0.02em;">Storytelling-first editors</h3>
+          <p style="margin:0;max-width:46ch;font-size:1.05rem;line-height:1.6;color:rgba(247,240,221,0.78);">Our editors understand narrative better than anyone in the segment. That's the difference between content that fills a feed and content people finish, share, and remember.</p>
+        </div>
+        <div data-reveal>
+          <div style="font-family:var(--mono);font-size:13px;color:var(--brick);margin-bottom:16px;">02</div>
+          <h3 style="margin:0 0 14px;font-weight:600;font-size:clamp(1.5rem,2.6vw,2.3rem);letter-spacing:-0.02em;">Sales-impact reporting</h3>
+          <p style="margin:0;max-width:46ch;font-size:1.05rem;line-height:1.6;color:rgba(247,240,221,0.78);">Every month we show how content performed — and its impact on the brand and pipeline. Not vanity dashboards. Proof you can take to a board.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section data-theme="cream" style="background:var(--cream);color:var(--indigo);padding:clamp(80px,13vh,150px) clamp(20px,4vw,56px);">
+    <div style="max-width:1400px;margin:0 auto;">
+      <div data-reveal style="font-family:var(--mono);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--indigo);margin-bottom:clamp(32px,5vh,56px);">[ 03 — The full deliverables menu ]</div>
+      <div data-reveal style="overflow-x:auto;border-radius:16px;border:1px solid var(--cream-dim);">
+        <div data-compare style="min-width:640px;"></div>
+      </div>
+      <p data-reveal style="margin:24px 0 0;font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:rgba(23,20,13,0.5);">Exact inclusions are finalised per partnership — this menu is the full capability set.</p>
+    </div>
+  </section>
+
+  <!-- ENGAGEMENT MODEL -->
+  <section data-theme="indigo" style="position:relative;background:var(--indigo);color:var(--cream);padding:clamp(80px,13vh,150px) clamp(20px,4vw,56px);overflow:hidden;">
+    <div style="position:absolute;bottom:-14%;left:-8%;width:44vw;height:44vw;border-radius:50%;background:radial-gradient(circle,rgba(244,190,27,0.28),transparent 62%);filter:blur(44px);animation:vgm-drift1 26s ease-in-out infinite;z-index:0;"></div>
+    <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;">
+      <div data-reveal style="font-family:var(--mono);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--brick);margin-bottom:clamp(28px,4vh,44px);">[ 04 — How we work ]</div>
+      <h2 data-reveal style="margin:0 0 clamp(28px,4vh,44px);max-width:20ch;font-weight:600;font-size:clamp(1.8rem,4vw,3.4rem);line-height:1.04;letter-spacing:-0.025em;">We fly to you. We shoot on location, at your comfort — wherever you are.</h2>
+      <p data-reveal style="margin:0;max-width:58ch;font-size:clamp(1.05rem,1.5vw,1.3rem);line-height:1.6;color:rgba(247,240,221,0.82);">Shooting is arranged per project. Our team comes to your office, your event, your city — so the work fits your world, not the other way around. It's how we keep production high-craft without turning your calendar upside down.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section data-theme="cream" style="background:var(--cream);color:var(--indigo);padding:clamp(80px,13vh,150px) clamp(20px,4vw,56px);">
+    <div style="max-width:900px;margin:0 auto;">
+      <div data-reveal style="font-family:var(--mono);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--indigo);margin-bottom:clamp(32px,5vh,56px);">[ 05 — Questions ]</div>
+      <div data-faq style="display:flex;flex-direction:column;"></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section data-theme="indigo" data-screen-label="Services CTA" style="position:relative;background:var(--indigo);color:var(--cream);padding:clamp(90px,16vh,180px) clamp(20px,4vw,56px);text-align:center;overflow:hidden;">
+    <div style="position:absolute;left:50%;top:50%;width:64vw;height:64vw;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(244,190,27,0.32),transparent 60%);filter:blur(44px);animation:vgm-drift1 20s ease-in-out infinite;z-index:0;"></div>
+    <div style="position:relative;z-index:2;max-width:900px;margin:0 auto;">
+      <h2 style="margin:0;font-weight:600;font-size:clamp(2.2rem,6vw,5rem);line-height:1;letter-spacing:-0.03em;text-wrap:balance;">
+        <span data-reveal-line style="display:block;">Not sure which tier</span>
+        <span data-reveal-line style="display:block;">fits? <span style="color:var(--brick);">Let's talk.</span></span>
+      </h2>
+      <p data-reveal style="margin:clamp(24px,4vh,36px) auto 0;max-width:46ch;font-size:1.1rem;line-height:1.55;color:rgba(247,240,221,0.8);">We take a limited number of partners at a time. Tell us where you're headed and we'll scope the right fit.</p>
+      <a href="VantixGrowth-Contact.dc.html" data-reveal data-magnetic data-cursor="" data-btn style="display:inline-flex;align-items:center;gap:12px;margin-top:clamp(32px,5vh,48px);padding:18px 34px;border-radius:100px;background:var(--brick);color:var(--indigo);font-weight:600;font-size:16px;"><span>Start a project</span> <span data-arrow style="font-family:var(--mono);display:inline-block;transition:transform .4s cubic-bezier(0.16,1,0.3,1);">→</span></a>
+    </div>
+  </section>
+
+  <footer data-theme="indigo" style="position:relative;background:var(--indigo-deep);color:var(--cream);padding:clamp(70px,10vh,110px) clamp(20px,4vw,56px) 0;overflow:hidden;">
+    <div style="max-width:1400px;margin:0 auto;position:relative;z-index:2;">
+      <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(32px,5vw,64px);padding-bottom:clamp(48px,7vh,80px);border-bottom:1px solid rgba(247,240,221,0.15);">
+        <a href="VantixGrowth-Contact.dc.html" data-cursor="" style="display:inline-block;font-weight:600;font-size:clamp(1.8rem,4.5vw,3.6rem);line-height:1.02;letter-spacing:-0.025em;color:var(--cream);">Let's build something<br>worth <span style="color:var(--brick);">watching</span> →</a>
+        <div style="display:flex;gap:clamp(32px,5vw,64px);flex-wrap:wrap;">
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <span style="font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(247,240,221,0.45);">Pages</span>
+            <a href="VantixGrowth-Work.dc.html" data-cursor="" style="color:rgba(247,240,221,0.85);font-size:14px;">Work</a>
+            <a href="VantixGrowth-Services.dc.html" data-cursor="" style="color:rgba(247,240,221,0.85);font-size:14px;">Services</a>
+            <a href="VantixGrowth-About.dc.html" data-cursor="" style="color:rgba(247,240,221,0.85);font-size:14px;">About</a>
+            <a href="VantixGrowth-Contact.dc.html" data-cursor="" style="color:rgba(247,240,221,0.85);font-size:14px;">Contact</a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <span style="font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(247,240,221,0.45);">Contact</span>
+            <a href="mailto:connect@vantixgrowth.com" data-cursor="" style="color:rgba(247,240,221,0.85);font-size:14px;font-family:var(--mono);">connect@vantixgrowth.com</a>
+            <a href="#" data-cursor="" style="color:rgba(247,240,221,0.85);font-size:14px;">Instagram</a>
+            <a href="#" data-cursor="" style="color:rgba(247,240,221,0.85);font-size:14px;">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding:26px 0;font-family:var(--mono);font-size:11px;letter-spacing:0.06em;color:rgba(247,240,221,0.5);">
+        <span>© 2026 VantixGrowth Media</span>
+        <span>Boutique content growth studio for tech</span>
+        <span>Made deliberately.</span>
+      </div>
+    </div>
+    <div aria-hidden="true" style="position:relative;z-index:1;font-weight:700;font-size:min(19vw,340px);line-height:0.8;letter-spacing:-0.04em;color:rgba(247,240,221,0.05);white-space:nowrap;margin:0 0 -0.14em -0.02em;">VantixGrowth</div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(p){ super(p); this.cursorScale=1; }
+  renderVals(){ return { rootRef:(el)=>{ this.root=el; } }; }
+  q(s){ return (this.root||document).querySelector(s); }
+  qa(s){ return Array.from((this.root||document).querySelectorAll(s)); }
+
+  componentDidMount(){
+    this.reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+    this.buildData();
+    requestAnimationFrame(()=>{ this.initCursor(); this.initReveals(); this.initMagnetic(); this.initNavScroll(); this.initButtons(); });
+  }
+
+  buildData(){
+    const host=this.root||document.querySelector('[data-root]');
+    if(host){ if(host.dataset.vgmBuilt) return; host.dataset.vgmBuilt='1'; }
+
+    // Comparison table
+    const rows=[
+      ['Short-form content','B','P','S'],
+      ['Long-form content (YouTube)','','P','S'],
+      ['Scripting','B','P','S'],
+      ['Shooting (on location)','','','S'],
+      ['Carousels (X / IG / LinkedIn)','','P','S'],
+      ['Monthly sales-impact report','B','P','S'],
+      ['Platform management','1','multi','all'],
+      ['Dedicated project manager','','P','S'],
+      ['Senior storytelling editors','','P','S'],
+      ['Clipping','B','P','S'],
+      ['Creative / shoot direction','','','S'],
+    ];
+    const cols=['Basic','Premium','VGM Studio'];
+    const cmp=this.q('[data-compare]');
+    if(cmp){
+      const cell=(v)=>{
+        if(v==='') return '<span style="color:rgba(23,20,13,0.22);font-family:var(--mono);">—</span>';
+        if(['B','P','S'].includes(v)) return '<span style="color:var(--indigo);font-family:var(--mono);font-size:1.1rem;">✓</span>';
+        return '<span style="font-family:var(--mono);font-size:11px;letter-spacing:0.04em;text-transform:uppercase;color:var(--indigo);">'+(v==='1'?'Single':v)+'</span>';
+      };
+      let html='<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;">';
+      // header
+      html+='<div style="padding:18px 22px;background:var(--indigo);color:var(--cream);font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">Capability</div>';
+      cols.forEach((c,i)=>{ html+='<div style="padding:18px 22px;background:'+(i===2?'var(--brick)':'var(--indigo)')+';color:'+(i===2?'var(--indigo)':'var(--cream)')+';text-align:center;font-weight:600;font-size:14px;">'+c+'</div>'; });
+      rows.forEach((r,ri)=>{
+        const bg = ri%2===0 ? 'var(--cream)' : 'var(--cream-dim)';
+        html+='<div style="padding:16px 22px;background:'+bg+';font-size:0.95rem;font-weight:500;">'+r[0]+'</div>';
+        for(let i=1;i<=3;i++){ html+='<div style="padding:16px 22px;background:'+bg+';text-align:center;">'+cell(r[i])+'</div>'; }
+      });
+      html+='</div>';
+      cmp.innerHTML=html;
+    }
+
+    // FAQ
+    const faqs=[
+      ['Do you publish pricing?','No. Every partnership is scoped to fit — deliverables, cadence, and seniority differ per client. Enquire and we\u2019ll send a tailored proposal fast.'],
+      ['Why do you only take a few clients?','Craft doesn\u2019t scale by volume. Working with a small number of partners is how we keep quality high and stay genuinely invested in each result.'],
+      ['How does shooting work?','We arrange shoots per project and fly to you — on location, wherever you are. VGM Studio includes full shooting and direction; other tiers can add it per project.'],
+      ['What makes your editors different?','They\u2019re storytelling-first. They understand narrative better than anyone in the segment, which is what turns technical detail into content people actually watch.'],
+      ['How do you prove impact?','A monthly report tying content performance to its effect on the brand and pipeline — not vanity metrics, but outcomes you can act on.'],
+      ['Can we move up a tier later?','Yes. Most partners start where they are today and deepen the engagement as the engine compounds.'],
+    ];
+    const fw=this.q('[data-faq]');
+    if(fw){
+      faqs.forEach((f,i)=>{
+        const item=document.createElement('div');
+        item.style.cssText='border-top:1px solid var(--cream-dim);'+(i===faqs.length-1?'border-bottom:1px solid var(--cream-dim);':'');
+        item.innerHTML=
+          '<button data-cursor="" style="all:unset;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;padding:26px 4px;cursor:none;">'+
+            '<span style="font-weight:600;font-size:clamp(1.1rem,1.8vw,1.4rem);letter-spacing:-0.01em;color:var(--indigo);">'+f[0]+'</span>'+
+            '<span data-icon style="flex:0 0 auto;font-family:var(--mono);font-size:1.4rem;color:var(--indigo);transition:transform .4s cubic-bezier(0.16,1,0.3,1);">+</span>'+
+          '</button>'+
+          '<div data-panel style="max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(0.16,1,0.3,1);">'+
+            '<p style="margin:0 4px 26px;max-width:60ch;font-size:1.02rem;line-height:1.6;color:rgba(23,20,13,0.75);">'+f[1]+'</p>'+
+          '</div>';
+        const btn=item.querySelector('button'), panel=item.querySelector('[data-panel]'), icon=item.querySelector('[data-icon]');
+        btn.addEventListener('click',()=>{
+          const open=panel.style.maxHeight&&panel.style.maxHeight!=='0px';
+          if(open){ panel.style.maxHeight='0'; icon.style.transform='rotate(0deg)'; icon.textContent='+'; }
+          else { panel.style.maxHeight=panel.scrollHeight+'px'; icon.style.transform='rotate(180deg)'; icon.textContent='–'; }
+        });
+        fw.appendChild(item);
+      });
+    }
+  }
+
+  initButtons(){
+    this.qa('[data-btn]').forEach(btn=>{
+      if(btn.dataset.btnReady) return; btn.dataset.btnReady='1';
+      btn.style.position='relative'; btn.style.overflow='hidden';
+      const t=btn.style.transition; btn.style.transition=(t?t+',':'')+'color .45s cubic-bezier(0.16,1,0.3,1)';
+      const orig=btn.style.color;
+      const fill=btn.dataset.btn||'var(--indigo)';
+      const textTo=btn.dataset.btnText||'var(--brick)';
+      const sweep=document.createElement('span');
+      sweep.style.cssText='position:absolute;inset:0;z-index:0;background:'+fill+';transform:scaleX(0);transform-origin:left center;transition:transform .5s cubic-bezier(0.16,1,0.3,1);pointer-events:none;border-radius:inherit;';
+      btn.insertBefore(sweep,btn.firstChild);
+      Array.from(btn.children).forEach(n=>{ if(n!==sweep){ n.style.position='relative'; n.style.zIndex='1'; } });
+      const arrow=btn.querySelector('[data-arrow]');
+      btn.addEventListener('mouseenter',()=>{ if(this.reduced) return; sweep.style.transform='scaleX(1)'; btn.style.color=textTo; if(arrow) arrow.style.transform='translateX(5px)'; });
+      btn.addEventListener('mouseleave',()=>{ sweep.style.transform='scaleX(0)'; btn.style.color=orig; if(arrow) arrow.style.transform='translateX(0)'; });
+    });
+  }
+
+  initCursor(){
+    if(matchMedia('(pointer:coarse)').matches){ const d=this.q('[data-cursor-dot]'),r=this.q('[data-cursor-ring]'); if(d)d.style.display='none'; if(r)r.style.display='none'; return; }
+    const dot=this.q('[data-cursor-dot]'), ring=this.q('[data-cursor-ring]'); if(!dot||!ring) return;
+    let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
+    addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; dot.style.transform='translate('+mx+'px,'+my+'px)'; });
+    const loop=()=>{ rx+=(mx-rx)*0.16; ry+=(my-ry)*0.16; ring.style.transform='translate('+rx+'px,'+ry+'px) translate(-50%,-50%) scale('+this.cursorScale+')'; requestAnimationFrame(loop); };
+    loop();
+    this.qa('[data-cursor]').forEach(el=>{
+      el.addEventListener('mouseenter',()=>{ const lbl=el.getAttribute('data-cursor'); ring.textContent=lbl||''; this.cursorScale=lbl?2.1:1.7; ring.style.background=lbl?'var(--brick)':'transparent'; ring.style.color='var(--cream)'; });
+      el.addEventListener('mouseleave',()=>{ ring.textContent=''; this.cursorScale=1; ring.style.background='transparent'; ring.style.color='var(--brick)'; });
+    });
+  }
+
+  reveal(el){
+    if(el.dataset.vgmShown) return; el.dataset.vgmShown='1';
+    if(el.hasAttribute('data-reveal-line')){
+      const group=el.parentElement.querySelectorAll('[data-reveal-line]'); let idx=0; group.forEach((g,i)=>{ if(g===el) idx=i; });
+      el.style.transitionDelay=(idx*0.08)+'s'; el.style.clipPath='inset(-12% 0 -12% 0)'; el.style.transform='translateY(0)';
+    } else { el.style.opacity='1'; el.style.transform='translateY(0)'; }
+  }
+  initReveals(){
+    const lines=this.qa('[data-reveal-line]'), blocks=this.qa('[data-reveal]'), all=[...lines,...blocks];
+    if(this.reduced){ all.forEach(e=>{e.style.opacity='1';e.style.transform='none';e.style.clipPath='none';}); return; }
+    lines.forEach(l=>{ l.style.clipPath='inset(0 0 110% 0)'; l.style.transform='translateY(0.4em)'; l.style.transition='clip-path 1s cubic-bezier(0.16,1,0.3,1),transform 1s cubic-bezier(0.16,1,0.3,1)'; });
+    blocks.forEach(b=>{ b.style.opacity='0'; b.style.transform='translateY(26px)'; b.style.transition='opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1)'; });
+    const io=new IntersectionObserver((ents)=>{ ents.forEach(e=>{ if(e.isIntersecting){ this.reveal(e.target); io.unobserve(e.target); } }); },{threshold:0.12,rootMargin:'0px 0px -6% 0px'});
+    all.forEach(e=>io.observe(e));
+    setTimeout(()=>{ all.forEach(e=>{ if(e.getBoundingClientRect().top<innerHeight*0.92) this.reveal(e); }); },200);
+  }
+
+  initMagnetic(){
+    if(this.reduced||matchMedia('(pointer:coarse)').matches) return;
+    this.qa('[data-magnetic]').forEach(el=>{
+      el.style.transition='transform 0.4s cubic-bezier(0.16,1,0.3,1)';
+      el.addEventListener('mousemove',e=>{ const r=el.getBoundingClientRect(); el.style.transform='translate('+(e.clientX-(r.left+r.width/2))*0.28+'px,'+(e.clientY-(r.top+r.height/2))*0.34+'px)'; });
+      el.addEventListener('mouseleave',()=>{ el.style.transform='translate(0,0)'; });
+    });
+  }
+
+  initNavScroll(){
+    const nav=this.q('[data-nav]'); if(!nav) return;
+    const word=this.q('[data-nav-word]'), links=this.qa('[data-navlink]');
+    const sections=this.qa('section[data-theme],footer[data-theme]');
+    let ticking=false;
+    const upd=()=>{
+      const y=(document.scrollingElement||document.documentElement).scrollTop;
+      let theme='cream';
+      for(const s of sections){ const r=s.getBoundingClientRect(); if(r.top<=64&&r.bottom>64){ theme=s.getAttribute('data-theme'); break; } }
+      const dark=theme==='indigo', fg=dark?'#F7F0DD':'#17140D', scrolled=y>40;
+      nav.style.padding=scrolled?'13px clamp(20px,4vw,56px)':'22px clamp(20px,4vw,56px)';
+      nav.style.background=scrolled?(dark?'rgba(14,11,6,0.72)':'rgba(247,240,221,0.72)'):'transparent';
+      nav.style.backdropFilter=scrolled?'blur(14px)':'none';
+      nav.style.webkitBackdropFilter=scrolled?'blur(14px)':'none';
+      if(word) word.style.color=fg;
+      links.forEach(l=>{ if(l.getAttribute('href').includes('Services')) l.style.color='var(--brick)'; else l.style.color=fg; });
+      ticking=false;
+    };
+    addEventListener('scroll',()=>{ if(!ticking){ requestAnimationFrame(upd); ticking=true; } },{passive:true});
+    upd();
+  }
+}
+</script>
+</body>
+</html>
